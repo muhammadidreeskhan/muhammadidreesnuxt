@@ -15,9 +15,9 @@
       <div class="hidden md:flex items-center space-x-8">
         <NuxtLink v-for="item in navItems" :key="item.path" :to="item.path"
                   class="nav-link relative py-2 font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors duration-300"
-                  :aria-current="$route.path === item.path ? 'page' : undefined">
+                  :aria-current="route.path === item.path ? 'page' : undefined">
           {{ item.title }}
-          <span v-if="$route.path === item.path" class="absolute bottom-0 left-0 w-full h-0.5 bg-primary-500 dark:bg-primary-400"></span>
+          <span v-if="route.path === item.path" class="absolute bottom-0 left-0 w-full h-0.5 bg-primary-500 dark:bg-primary-400"></span>
         </NuxtLink>
         
         <!-- Dark Mode Toggle -->
@@ -50,7 +50,7 @@
       <div class="container-custom py-6 space-y-6">
         <NuxtLink v-for="item in navItems" :key="item.path" :to="item.path"
                   class="block py-2 text-lg font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors duration-300"
-                  :aria-current="$route.path === item.path ? 'page' : undefined"
+                  :aria-current="route.path === item.path ? 'page' : undefined"
                   @click="closeMobileMenu">
           {{ item.title }}
         </NuxtLink>
@@ -71,13 +71,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, useRoute, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 
 const mobileMenuOpen = ref(false);
 const scrolled = ref(false);
 const colorMode = useColorMode();
 const isDark = ref(colorMode.preference === 'dark');
-const $route = useRoute();
+const route = useRoute();
 
 const navItems = [
   { title: 'Home', path: '/' },
@@ -113,7 +113,7 @@ const handleScroll = () => {
 };
 
 // Close mobile menu on route change
-watch(() => $route.path, () => {
+watch(() => route.path, () => {
   if (mobileMenuOpen.value) {
     closeMobileMenu();
   }
