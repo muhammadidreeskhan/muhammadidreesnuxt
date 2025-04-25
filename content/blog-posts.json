@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "The Future of Web Development in 2025",
+    "slug": "future-web-development-2025",
+    "date": "2025-04-15",
+    "category": "Web Development",
+    "excerpt": "Exploring emerging trends and technologies that will shape the future of web development over the next few years.",
+    "image": "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg",
+    "content": "As web development continues to evolve at a rapid pace...",
+    "tags": ["Web Development", "JavaScript", "Future Trends", "AI"]
+  },
+  {
+    "id": 2,
+    "title": "Designing for Accessibility: Best Practices",
+    "slug": "designing-accessibility-best-practices",
+    "date": "2025-04-10",
+    "category": "Design",
+    "excerpt": "How to ensure your designs are inclusive and accessible to all users, regardless of abilities or disabilities.",
+    "image": "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
+    "content": "Creating accessible websites isn't just a legal requirement in many places...",
+    "tags": ["Accessibility", "Design", "UX", "Inclusion"]
+  },
+  {
+    "id": 3,
+    "title": "Getting Started with Nuxt 3: A Complete Guide",
+    "slug": "getting-started-nuxt3-guide",
+    "date": "2025-04-05",
+    "category": "Tutorials",
+    "excerpt": "A comprehensive introduction to building modern web applications with Nuxt 3 and its powerful features.",
+    "image": "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg",
+    "content": "Nuxt 3 represents a significant evolution in the Vue.js ecosystem...",
+    "tags": ["Nuxt.js", "Vue.js", "JavaScript", "Tutorial"]
+  },
+  {
+    "id": 4,
+    "title": "The Rise of AI in Web Development",
+    "slug": "rise-ai-web-development",
+    "date": "2025-03-28",
+    "category": "Technology",
+    "excerpt": "How artificial intelligence is transforming the way we build websites and web applications.",
+    "image": "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+    "content": "Artificial intelligence is no longer just a buzzword in web development...",
+    "tags": ["AI", "Machine Learning", "Web Development", "Future Tech"]
+  },
+  {
+    "id": 5,
+    "title": "Optimizing Website Performance: A Practical Guide",
+    "slug": "website-performance-optimization-guide",
+    "date": "2025-03-20",
+    "category": "Web Development",
+    "excerpt": "Step-by-step techniques to improve your website's speed, performance, and user experience.",
+    "image": "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg",
+    "content": "Website performance is a critical factor in user experience and conversion rates...",
+    "tags": ["Performance", "Optimization", "Web Development", "UX"]
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "title": "E-commerce Platform",
+    "slug": "ecommerce-platform",
+    "summary": "A full-featured online store with product management, cart, and payment processing.",
+    "description": "Built a complete e-commerce solution for a fashion brand with product catalog, user accounts, shopping cart, and secure checkout. Integrated with Stripe for payments and includes an admin dashboard for inventory management.",
+    "image": "https://images.pexels.com/photos/6956800/pexels-photo-6956800.jpeg",
+    "tags": ["Vue.js", "Node.js", "Stripe"],
+    "category": "Web Application",
+    "client": "Fashion Boutique",
+    "completed": "2024",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Health & Fitness App",
+    "slug": "health-fitness-app",
+    "summary": "Mobile application for tracking workouts, nutrition, and personal health metrics.",
+    "description": "Developed a cross-platform mobile app that helps users track their fitness goals, log workouts, monitor nutrition, and visualize progress through interactive charts and reports.",
+    "image": "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg",
+    "tags": ["React Native", "Firebase", "UX Design"],
+    "category": "Mobile App",
+    "client": "FitLife Inc.",
+    "completed": "2023",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Corporate Website Redesign",
+    "slug": "corporate-website-redesign",
+    "summary": "Complete overhaul of a financial services company website with modern design and CMS.",
+    "description": "Redesigned a dated corporate website for a financial services firm, focusing on improved UX, accessibility, and content management. Implemented a custom CMS solution for easy content updates.",
+    "image": "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg",
+    "tags": ["Web Design", "WordPress", "SEO"],
+    "category": "Website",
+    "client": "Financial Group",
+    "completed": "2024",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": "Real Estate Listing Platform",
+    "slug": "real-estate-platform",
+    "summary": "Property search and listing platform with map integration and agent dashboard.",
+    "description": "Created a comprehensive real estate platform that allows users to search for properties by location, filters, and map view. Includes agent profiles, property management dashboard, and lead generation tools.",
+    "image": "https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg",
+    "tags": ["React", "Node.js", "MongoDB", "Google Maps API"],
+    "category": "Web Application",
+    "client": "HomeFind Realty",
+    "completed": "2023",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "Restaurant Ordering System",
+    "slug": "restaurant-ordering-system",
+    "summary": "Digital menu and ordering system for a restaurant chain with kitchen display integration.",
+    "description": "Developed a digital ordering system that allows customers to browse menus, place orders, and make payments from their phones. Includes admin dashboard for menu management and kitchen display system for order fulfillment.",
+    "image": "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
+    "tags": ["Vue.js", "Express", "PostgreSQL", "Socket.io"],
+    "category": "Web Application",
+    "client": "Gourmet Dining Group",
+    "completed": "2024",
+    "featured": false
+  }
+]
