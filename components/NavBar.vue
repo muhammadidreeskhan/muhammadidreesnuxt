@@ -71,13 +71,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, useRoute } from 'vue';
-import { useColorMode } from '@nuxtjs/color-mode';
+import { ref, onMounted, onBeforeUnmount, useRoute, watch } from 'vue';
 
 const mobileMenuOpen = ref(false);
 const scrolled = ref(false);
 const colorMode = useColorMode();
-const isDark = ref(colorMode.value === 'dark');
+const isDark = ref(colorMode.preference === 'dark');
 const $route = useRoute();
 
 const navItems = [
@@ -130,7 +129,7 @@ const handleEscKey = (e) => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('keydown', handleEscKey);
-  isDark.value = colorMode.value === 'dark';
+  isDark.value = colorMode.preference === 'dark';
 });
 
 onBeforeUnmount(() => {
