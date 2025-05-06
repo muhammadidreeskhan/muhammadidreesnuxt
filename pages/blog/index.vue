@@ -105,93 +105,31 @@ definePageMeta({
   description: 'Read articles about web development, design, and tech insights from my experiences in the industry.'
 });
 
-// Sample blog posts data
-const blogPosts = [
-  {
-    id: 1,
-    title: 'The Future of Web Development in 2025',
-    slug: 'future-web-development-2025',
-    date: '2025-04-15',
-    category: 'Web Development',
-    excerpt: 'Exploring emerging trends and technologies that will shape the future of web development over the next few years.',
-    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg'
-  },
-  {
-    id: 2,
-    title: 'Designing for Accessibility: Best Practices',
-    slug: 'designing-accessibility-best-practices',
-    date: '2025-04-10',
-    category: 'Design',
-    excerpt: 'How to ensure your designs are inclusive and accessible to all users, regardless of abilities or disabilities.',
-    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg'
-  },
-  {
-    id: 3,
-    title: 'Getting Started with Nuxt 3: A Complete Guide',
-    slug: 'getting-started-nuxt3-guide',
-    date: '2025-04-05',
-    category: 'Tutorials',
-    excerpt: 'A comprehensive introduction to building modern web applications with Nuxt 3 and its powerful features.',
-    image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg'
-  },
-  {
-    id: 4,
-    title: 'The Rise of AI in Web Development',
-    slug: 'rise-ai-web-development',
-    date: '2025-03-28',
-    category: 'Technology',
-    excerpt: 'How artificial intelligence is transforming the way we build websites and web applications.',
-    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg'
-  },
-  {
-    id: 5,
-    title: 'Optimizing Website Performance: A Practical Guide',
-    slug: 'website-performance-optimization-guide',
-    date: '2025-03-20',
-    category: 'Web Development',
-    excerpt: 'Step-by-step techniques to improve your website\'s speed, performance, and user experience.',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg'
-  },
-  {
-    id: 6,
-    title: 'Creating Effective User Onboarding Experiences',
-    slug: 'effective-user-onboarding-experiences',
-    date: '2025-03-15',
-    category: 'UX Design',
-    excerpt: 'How to design onboarding flows that help users understand your product and get value quickly.',
-    image: 'https://images.pexels.com/photos/3182777/pexels-photo-3182777.jpeg'
-  },
-  {
-    id: 7,
-    title: 'The Complete Guide to CSS Grid Layout',
-    slug: 'complete-guide-css-grid-layout',
-    date: '2025-03-08',
-    category: 'Tutorials',
-    excerpt: 'Everything you need to know about CSS Grid Layout for creating complex, responsive web layouts.',
-    image: 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg'
-  },
-  {
-    id: 8,
-    title: 'Securing Your Web Applications: Best Practices',
-    slug: 'securing-web-applications-best-practices',
-    date: '2025-03-01',
-    category: 'Security',
-    excerpt: 'Essential security measures to protect your web applications from common vulnerabilities and threats.',
-    image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg'
-  },
-  {
-    id: 9,
-    title: 'How to Build a Personal Brand as a Developer',
-    slug: 'build-personal-brand-developer',
-    date: '2025-02-22',
-    category: 'Career',
-    excerpt: 'Strategies for creating a strong personal brand that helps you stand out in the tech industry.',
-    image: 'https://images.pexels.com/photos/3760530/pexels-photo-3760530.jpeg'
-  }
-];
+// Fetch all blog posts from Nuxt Content
+const { data: contentArticles } = await useAsyncData('content-blog-posts', () => {
+  return queryContent('blog').sort({ date: -1 }).find();
+});
+
+// Import blog posts from JSON
+import blogPostsJson from '~/content/blog-posts.json';
+// Combine both sources of blog posts
+const blogPosts = computed(() => {
+  const contentPosts = contentArticles.value || [];
+  
+  // Convert JSON posts to the same format as content posts
+  const jsonPosts = blogPostsJson.map(post => ({
+    ...post,
+    _path: `/blog/${post.slug}`,
+    slug: post.slug
+  }));
+  
+  return [...contentPosts, ...jsonPosts];
+});
 
 // Extract unique categories
-const blogCategories = [...new Set(blogPosts.map(post => post.category))];
+const blogCategories = computed(() => {
+  return [...new Set(blogPosts.value.map(post => post.category).filter(Boolean))];
+});
 
 // Active category filter
 const activeCategory = ref('all');
@@ -199,9 +137,9 @@ const activeCategory = ref('all');
 // Filtered posts based on active category
 const filteredPosts = computed(() => {
   if (activeCategory.value === 'all') {
-    return blogPosts;
+    return blogPosts.value;
   }
-  return blogPosts.filter(post => post.category === activeCategory.value);
+  return blogPosts.value.filter(post => post.category === activeCategory.value);
 });
 
 // Newsletter subscription

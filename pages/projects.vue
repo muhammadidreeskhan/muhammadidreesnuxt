@@ -115,8 +115,8 @@
                 
                 <!-- View Details Button -->
                 <NuxtLink 
-                  :to="`/projects/${project.id}`"
-                  class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
+                  :to="`/projects/${project.slug}`" 
+                  class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:underline"
                 >
                   View Details
                   <Icon name="ph:arrow-right" class="ml-1 w-4 h-4" />
@@ -185,6 +185,7 @@ definePageMeta({
 const projects = ref([
   {
     id: 'ecommerce-platform',
+    slug: 'ecommerce-platform',
     title: 'E-Commerce Platform',
     description: 'A full-featured e-commerce platform with product management, cart functionality, and payment processing.',
     image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -196,6 +197,7 @@ const projects = ref([
   },
   {
     id: 'fitness-tracker-app',
+    slug: 'fitness-tracker-app',
     title: 'Fitness Tracker App',
     description: 'Mobile application for tracking workouts, nutrition, and fitness goals with personalized recommendations.',
     image: 'https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -207,6 +209,7 @@ const projects = ref([
   },
   {
     id: 'banking-dashboard',
+    slug: 'banking-dashboard',
     title: 'Banking Dashboard UI',
     description: 'Modern dashboard interface for a banking application with account management and transaction visualization.',
     image: 'https://images.pexels.com/photos/7567444/pexels-photo-7567444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -218,6 +221,7 @@ const projects = ref([
   },
   {
     id: 'real-estate-platform',
+    slug: 'real-estate-platform',
     title: 'Real Estate Platform',
     description: 'Web platform for property listings with advanced search, virtual tours, and agent communication.',
     image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -229,6 +233,7 @@ const projects = ref([
   },
   {
     id: 'travel-companion-app',
+    slug: 'travel-companion-app',
     title: 'Travel Companion App',
     description: 'Mobile app for travelers with itinerary planning, local recommendations, and offline maps.',
     image: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -240,6 +245,7 @@ const projects = ref([
   },
   {
     id: 'music-streaming-ui',
+    slug: 'music-streaming-ui',
     title: 'Music Streaming UI',
     description: 'User interface design for a music streaming service with focus on discovery and personalization.',
     image: 'https://images.pexels.com/photos/6320/smartphone-vintage-technology-music.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

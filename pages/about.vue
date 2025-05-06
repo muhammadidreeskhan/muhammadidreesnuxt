@@ -63,7 +63,7 @@
               <!-- Main Image with Frame -->
               <div class="relative rounded-2xl overflow-hidden shadow-2xl dark:shadow-gray-900/50 border border-white/20 dark:border-gray-800/50 z-10 aspect-[4/5] bg-white dark:bg-gray-800">
                 <img 
-                  src="/images/muhammad-idrees-profile.svg" 
+                  src="/images/profile image.png" 
                   alt="Muhammad Idrees - Professional Portrait" 
                   class="w-full h-full object-cover"
                 />

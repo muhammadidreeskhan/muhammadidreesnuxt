@@ -250,67 +250,71 @@
 const route = useRoute();
 const slug = route.params.slug;
 
-// Sample blog posts data
-const allPosts = [
-  {
-    id: 1,
-    title: 'The Future of Web Development in 2025',
-    slug: 'future-web-development-2025',
-    date: '2025-04-15',
-    category: 'Web Development',
-    excerpt: 'Exploring emerging trends and technologies that will shape the future of web development over the next few years.',
-    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg'
-  },
-  {
-    id: 2,
-    title: 'Designing for Accessibility: Best Practices',
-    slug: 'designing-accessibility-best-practices',
-    date: '2025-04-10',
-    category: 'Design',
-    excerpt: 'How to ensure your designs are inclusive and accessible to all users, regardless of abilities or disabilities.',
-    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg'
-  },
-  {
-    id: 3,
-    title: 'Getting Started with Nuxt 3: A Complete Guide',
-    slug: 'getting-started-nuxt3-guide',
-    date: '2025-04-05',
-    category: 'Tutorials',
-    excerpt: 'A comprehensive introduction to building modern web applications with Nuxt 3 and its powerful features.',
-    image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg'
-  },
-  {
-    id: 4,
-    title: 'The Rise of AI in Web Development',
-    slug: 'rise-ai-web-development',
-    date: '2025-03-28',
-    category: 'Technology',
-    excerpt: 'How artificial intelligence is transforming the way we build websites and web applications.',
-    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg'
-  },
-  {
-    id: 5,
-    title: 'Optimizing Website Performance: A Practical Guide',
-    slug: 'website-performance-optimization-guide',
-    date: '2025-03-20',
-    category: 'Web Development',
-    excerpt: 'Step-by-step techniques to improve your website\'s speed, performance, and user experience.',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg'
+// Import blog posts from JSON
+import blogPostsJson from '~/content/blog-posts.json';
+
+// Fetch the current post from Nuxt Content
+const { data: contentPost } = await useAsyncData(`blog-content-${slug}`, () => {
+  return queryContent('blog').where({ slug: slug }).findOne();
+});
+
+// Find post from JSON if not in content
+const jsonPost = computed(() => {
+  if (contentPost.value) return null;
+  return blogPostsJson.find(p => p.slug === slug);
+});
+
+// Combined post from either source
+const post = computed(() => {
+  if (contentPost.value) return contentPost.value;
+  if (jsonPost.value) {
+    // Format JSON post to match content post structure
+    return {
+      ...jsonPost.value,
+      excerpt: jsonPost.value.excerpt || jsonPost.value.description,
+      _path: `/blog/${jsonPost.value.slug}`
+    };
   }
-];
+  return null;
+});
+
+// Fetch all blog posts from content for related and recent posts
+const { data: contentPosts } = await useAsyncData('all-content-posts', () => {
+  return queryContent('blog').find();
+});
+
+// Combine both sources of blog posts
+const allPosts = computed(() => {
+  const contentItems = contentPosts.value || [];
+  
+  // Convert JSON posts to the same format as content posts
+  const jsonPosts = blogPostsJson.map(p => ({
+    ...p,
+    _path: `/blog/${p.slug}`,
+    slug: p.slug,
+    excerpt: p.excerpt || p.description
+  }));
+  
+  return [...contentItems, ...jsonPosts];
+});
 
 // Extract unique categories
-const blogCategories = [...new Set(allPosts.map(post => post.category))];
-
-// Find the current post based on slug
-const post = computed(() => allPosts.find(p => p.slug === slug));
+const blogCategories = computed(() => {
+  if (!allPosts.value) return [];
+  return [...new Set(allPosts.value.map(post => post.category).filter(Boolean))];
+});
 
 // Get related posts (excluding current, same category if possible)
 const relatedPosts = computed(() => {
-  if (!post.value) return [];
+  if (!post.value || !allPosts.value) return [];
+  
+  const currentSlug = post.value.slug;
+  const currentCategory = post.value.category;
   
   // Try to find posts in the same category
-  const sameCategoryPosts = allPosts.filter(p => p.id !== post.value.id && p.category === post.value.category);
+  const sameCategoryPosts = allPosts.value.filter(p => 
+    p.slug !== currentSlug && p.category === currentCategory
+  );
   
   // If we have enough in the same category, use those
   if (sameCategoryPosts.length >= 3) {
@@ -318,15 +322,19 @@ const relatedPosts = computed(() => {
   }
   
   // Otherwise, get other posts regardless of category
-  const otherPosts = allPosts.filter(p => p.id !== post.value.id && p.category !== post.value.category);
+  const otherPosts = allPosts.value.filter(p => 
+    p.slug !== currentSlug && (!p.category || p.category !== currentCategory)
+  );
   
   return [...sameCategoryPosts, ...otherPosts].slice(0, 3);
 });
 
 // Get recent posts for sidebar (excluding current)
 const recentPosts = computed(() => {
-  return allPosts
-    .filter(p => p.id !== post.value?.id)
+  if (!post.value || !allPosts.value) return [];
+  
+  return allPosts.value
+    .filter(p => p.slug !== post.value.slug)
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
 });
@@ -344,6 +352,6 @@ const formatDate = (dateString) => {
 // Set meta tags for the post
 useSeoMeta({
   title: post.value ? post.value.title : 'Article Not Found',
-  description: post.value ? post.value.excerpt : 'Blog article page'
+  description: post.value ? post.value.description : 'Blog article page'
 });
 </script>

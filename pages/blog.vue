@@ -25,12 +25,24 @@
           <!-- Blog Categories Filter -->
           <div class="flex flex-wrap justify-center gap-3 mb-8">
             <button 
-              v-for="category in ['All', 'Development', 'Design', 'Technology', 'Career']" 
-              :key="category"
-              @click="filterCategory = category === 'All' ? null : category"
+              key="all"
+              @click="filterCategory = null"
               class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
               :class="[
-                filterCategory === (category === 'All' ? null : category)
+                filterCategory === null
+                  ? 'bg-primary-600 dark:bg-primary-500 text-white shadow-md'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+              ]"
+            >
+              All
+            </button>
+            <button 
+              v-for="category in categories" 
+              :key="category"
+              @click="filterCategory = category"
+              class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+              :class="[
+                filterCategory === category
                   ? 'bg-primary-600 dark:bg-primary-500 text-white shadow-md'
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
               ]"
@@ -78,17 +90,17 @@
                     Featured
                   </span>
                   <h2 class="text-2xl md:text-4xl font-bold text-white mb-3">{{ featuredArticle.title }}</h2>
-                  <p class="text-gray-200 mb-6 max-w-3xl">{{ featuredArticle.excerpt }}</p>
+                  <p class="text-gray-200 mb-6 max-w-3xl">{{ featuredArticle.description }}</p>
                   
                   <div class="flex items-center justify-between">
                     <div class="flex items-center">
                       <img 
-                        :src="featuredArticle.author.avatar" 
-                        :alt="featuredArticle.author.name"
+                        src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" 
+                        alt="Muhammad Idrees"
                         class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-white"
                       />
                       <div>
-                        <div class="text-white font-medium">{{ featuredArticle.author.name }}</div>
+                        <div class="text-white font-medium">Muhammad Idrees</div>
                         <div class="text-gray-300 text-sm">{{ formatDate(featuredArticle.date) }}</div>
                       </div>
                     </div>
@@ -145,14 +157,14 @@
               <!-- Article Content -->
               <div class="p-6">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">{{ article.title }}</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ article.excerpt }}</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ article.description }}</p>
                 
                 <!-- Author and Date -->
                 <div class="flex items-center justify-between mt-6">
                   <div class="flex items-center">
                     <img 
-                      :src="article.author.avatar" 
-                      :alt="article.author.name"
+                      src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" 
+                      alt="Muhammad Idrees"
                       class="w-8 h-8 rounded-full object-cover mr-2"
                     />
                     <div class="text-sm text-gray-600 dark:text-gray-400">{{ formatDate(article.date) }}</div>
@@ -234,117 +246,30 @@ import { ref, computed } from 'vue';
 
 definePageMeta({
   title: 'Blog',
-  description: 'Articles, tutorials, and insights on web development, design, and technology.'
+  description: 'Thoughts, insights, and guides on web development, design, and technology.'
 });
 
-// Sample blog data
-const articles = ref([
-  {
-    id: 1,
-    slug: 'mastering-css-grid-layout',
-    title: 'Mastering CSS Grid Layout: A Comprehensive Guide',
-    excerpt: 'Learn how to create complex layouts with CSS Grid, from basic concepts to advanced techniques.',
-    content: '',
-    image: 'https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Development',
-    date: '2025-03-15',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: true
-  },
-  {
-    id: 2,
-    slug: 'ux-design-principles',
-    title: 'Essential UX Design Principles for Better User Experiences',
-    excerpt: 'Explore key UX design principles that can dramatically improve how users interact with your products.',
-    content: '',
-    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Design',
-    date: '2025-03-02',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  },
-  {
-    id: 3,
-    slug: 'javascript-async-await',
-    title: 'Understanding JavaScript Async/Await: Practical Examples',
-    excerpt: 'Demystify asynchronous JavaScript with clear examples of async/await patterns and best practices.',
-    content: '',
-    image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Development',
-    date: '2025-02-20',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  },
-  {
-    id: 4,
-    slug: 'ai-in-web-development',
-    title: 'The Impact of AI on Modern Web Development',
-    excerpt: 'Explore how artificial intelligence is transforming the way we build and interact with web applications.',
-    content: '',
-    image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Technology',
-    date: '2025-02-10',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  },
-  {
-    id: 5,
-    slug: 'responsive-design-strategies',
-    title: 'Responsive Design Strategies for 2025 and Beyond',
-    excerpt: 'Learn about the latest approaches to responsive design that work across all devices and screen sizes.',
-    content: '',
-    image: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Design',
-    date: '2025-01-28',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  },
-  {
-    id: 6,
-    slug: 'freelance-developer-guide',
-    title: 'The Complete Guide to Freelance Web Development',
-    excerpt: 'Everything you need to know about starting and growing a successful freelance web development business.',
-    content: '',
-    image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Career',
-    date: '2025-01-15',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  },
-  {
-    id: 7,
-    slug: 'vue-vs-react',
-    title: 'Vue.js vs React: Choosing the Right Framework',
-    excerpt: 'A detailed comparison of Vue.js and React to help you decide which framework is best for your project.',
-    content: '',
-    image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    category: 'Development',
-    date: '2025-01-05',
-    author: {
-      name: 'Muhammad Idrees',
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    featured: false
-  }
-]);
+// Fetch all blog posts from Nuxt Content
+const { data: contentArticles } = await useAsyncData('content-blog-posts', () => {
+  return queryContent('blog').sort({ date: -1 }).find();
+});
+
+// Import blog posts from JSON
+import blogPostsJson from '~/content/blog-posts.json';
+
+// Combine both sources of blog posts
+const allArticles = computed(() => {
+  const contentPosts = contentArticles.value || [];
+  
+  // Convert JSON posts to the same format as content posts
+  const jsonPosts = blogPostsJson.map(post => ({
+    ...post,
+    _path: `/blog/${post.slug}`,
+    slug: post.slug
+  }));
+  
+  return [...contentPosts, ...jsonPosts];
+});
 
 // Filter and search
 const filterCategory = ref(null);
@@ -355,13 +280,22 @@ const newsletterEmail = ref('');
 
 // Get featured article
 const featuredArticle = computed(() => {
-  return articles.value.find(article => article.featured);
+  if (!allArticles.value) return null;
+  return allArticles.value.find(article => article.featured === true);
+});
+
+// Get all categories
+const categories = computed(() => {
+  if (!allArticles.value) return [];
+  return [...new Set(allArticles.value.map(article => article.category).filter(Boolean))];
 });
 
 // Filter and search articles
 const filteredArticles = computed(() => {
+  if (!allArticles.value) return [];
+  
   // Remove featured article from regular list
-  let result = articles.value.filter(article => !article.featured);
+  let result = allArticles.value.filter(article => !article.featured);
   
   // Apply category filter
   if (filterCategory.value) {
@@ -372,9 +306,9 @@ const filteredArticles = computed(() => {
   if (searchQuery.value.trim()) {
     const query = searchQuery.value.toLowerCase();
     result = result.filter(article => 
-      article.title.toLowerCase().includes(query) || 
-      article.excerpt.toLowerCase().includes(query) ||
-      article.category.toLowerCase().includes(query)
+      article.title?.toLowerCase().includes(query) || 
+      (article.description || article.excerpt || '').toLowerCase().includes(query) ||
+      (article.category || '').toLowerCase().includes(query)
     );
   }
   
@@ -387,10 +321,12 @@ const filteredArticles = computed(() => {
 
 // Calculate total pages
 const totalPages = computed(() => {
-  let filteredCount = articles.value.filter(article => !article.featured).length;
+  if (!allArticles.value) return 1;
+  
+  let filteredCount = allArticles.value.filter(article => !article.featured).length;
   
   if (filterCategory.value) {
-    filteredCount = articles.value.filter(
+    filteredCount = allArticles.value.filter(
       article => !article.featured && article.category === filterCategory.value
     ).length;
   }

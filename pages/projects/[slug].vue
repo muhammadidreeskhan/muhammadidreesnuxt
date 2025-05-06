@@ -170,65 +170,108 @@ const slug = route.params.slug;
 // Sample projects data
 const allProjects = [
   {
-    id: 1,
-    title: 'E-commerce Platform',
+    id: 'ecommerce-platform',
     slug: 'ecommerce-platform',
-    summary: 'A full-featured online store with product management, cart, and payment processing.',
-    description: 'Built a complete e-commerce solution for a fashion brand with product catalog, user accounts, shopping cart, and secure checkout. Integrated with Stripe for payments and includes an admin dashboard for inventory management.',
-    image: 'https://images.pexels.com/photos/6956800/pexels-photo-6956800.jpeg',
-    tags: ['Vue.js', 'Node.js', 'Stripe'],
-    category: 'Web Application',
+    title: 'E-Commerce Platform',
+    summary: 'A full-featured e-commerce platform with product management, cart functionality, and payment processing.',
+    description: 'A full-featured e-commerce platform with product management, cart functionality, and payment processing. Built a complete e-commerce solution for a fashion brand with product catalog, user accounts, shopping cart, and secure checkout. Integrated with Stripe for payments and includes an admin dashboard for inventory management.',
+    image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe API'],
+    category: 'Web Development',
     client: 'Fashion Boutique',
     completed: '2024'
   },
   {
-    id: 2,
-    title: 'Health & Fitness App',
-    slug: 'health-fitness-app',
-    summary: 'Mobile application for tracking workouts, nutrition, and personal health metrics.',
-    description: 'Developed a cross-platform mobile app that helps users track their fitness goals, log workouts, monitor nutrition, and visualize progress through interactive charts and reports.',
-    image: 'https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg',
-    tags: ['React Native', 'Firebase', 'UX Design'],
-    category: 'Mobile App',
+    id: 'fitness-tracker-app',
+    slug: 'fitness-tracker-app',
+    title: 'Fitness Tracker App',
+    summary: 'Mobile application for tracking workouts, nutrition, and fitness goals with personalized recommendations.',
+    description: 'Mobile application for tracking workouts, nutrition, and fitness goals with personalized recommendations. Developed a cross-platform mobile app that helps users track their fitness goals, log workouts, monitor nutrition, and visualize progress through interactive charts and reports.',
+    image: 'https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['React Native', 'Firebase', 'Redux', 'Health API'],
+    category: 'Mobile Apps',
     client: 'FitLife Inc.',
     completed: '2023'
   },
   {
-    id: 3,
-    title: 'Corporate Website Redesign',
-    slug: 'corporate-website-redesign',
-    summary: 'Complete overhaul of a financial services company website with modern design and CMS.',
-    description: 'Redesigned a dated corporate website for a financial services firm, focusing on improved UX, accessibility, and content management. Implemented a custom CMS solution for easy content updates.',
-    image: 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg',
-    tags: ['Web Design', 'WordPress', 'SEO'],
-    category: 'Website',
+    id: 'banking-dashboard',
+    slug: 'banking-dashboard',
+    title: 'Banking Dashboard UI',
+    summary: 'Modern dashboard interface for a banking application with account management and transaction visualization.',
+    description: 'Modern dashboard interface for a banking application with account management and transaction visualization. Redesigned a dated banking interface with a focus on improved UX, accessibility, and data visualization. Implemented a custom dashboard for easy financial management.',
+    image: 'https://images.pexels.com/photos/7567444/pexels-photo-7567444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping'],
+    category: 'UI/UX Design',
     client: 'Financial Group',
     completed: '2024'
   },
   {
-    id: 4,
-    title: 'Real Estate Listing Platform',
+    id: 'real-estate-platform',
     slug: 'real-estate-platform',
-    summary: 'Property search and listing platform with map integration and agent dashboard.',
-    description: 'Created a comprehensive real estate platform that allows users to search for properties by location, filters, and map view. Includes agent profiles, property management dashboard, and lead generation tools.',
-    image: 'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg',
-    tags: ['React', 'Node.js', 'MongoDB', 'Google Maps API'],
-    category: 'Web Application',
+    title: 'Real Estate Platform',
+    summary: 'Web platform for property listings with advanced search, virtual tours, and agent communication.',
+    description: 'Web platform for property listings with advanced search, virtual tours, and agent communication. Created a comprehensive real estate platform that allows users to search for properties by location, filters, and map view. Includes agent profiles, property management dashboard, and lead generation tools.',
+    image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['React.js', 'Node.js', 'PostgreSQL', 'Google Maps API'],
+    category: 'Web Development',
     client: 'HomeFind Realty',
     completed: '2023'
+  },
+  {
+    id: 'travel-companion-app',
+    slug: 'travel-companion-app',
+    title: 'Travel Companion App',
+    summary: 'Mobile app for travelers with itinerary planning, local recommendations, and offline maps.',
+    description: 'Mobile app for travelers with itinerary planning, local recommendations, and offline maps. Developed a mobile application that helps travelers plan their trips, discover local attractions, and navigate without internet connection.',
+    image: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['Flutter', 'Firebase', 'Google Places API', 'MapBox'],
+    category: 'Mobile Apps',
+    client: 'TravelEase',
+    completed: '2023'
+  },
+  {
+    id: 'music-streaming-ui',
+    slug: 'music-streaming-ui',
+    title: 'Music Streaming UI',
+    summary: 'User interface design for a music streaming service with focus on discovery and personalization.',
+    description: 'User interface design for a music streaming service with focus on discovery and personalization. Created a modern and intuitive UI for a music streaming platform that emphasizes personalized recommendations and easy content discovery.',
+    image: 'https://images.pexels.com/photos/6320/smartphone-vintage-technology-music.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    tags: ['Figma', 'Adobe Illustrator', 'Prototyping', 'User Testing'],
+    category: 'UI/UX Design',
+    client: 'MusicStream Inc.',
+    completed: '2024'
   }
 ];
 
 // Find the current project based on slug
-const project = computed(() => allProjects.find(p => p.slug === slug));
+const project = computed(() => {
+  // Remove debug logs in production
+  // console.log('Current slug:', slug);
+  const found = allProjects.find(p => p.slug === slug);
+  // console.log('Found project:', found ? found.title : 'Not found');
+  return found;
+});
 
 // Get related projects (excluding current)
 const relatedProjects = computed(() => {
   if (!project.value) return [];
   
-  return allProjects
-    .filter(p => p.id !== project.value.id)
-    .slice(0, 3);
+  // Try to find projects in the same category first
+  const sameCategoryProjects = allProjects.filter(p => 
+    p.id !== project.value.id && p.category === project.value.category
+  );
+  
+  // If we have enough in the same category, use those
+  if (sameCategoryProjects.length >= 3) {
+    return sameCategoryProjects.slice(0, 3);
+  }
+  
+  // Otherwise, get other projects to fill up to 3
+  const otherProjects = allProjects.filter(p => 
+    p.id !== project.value.id && p.category !== project.value.category
+  );
+  
+  return [...sameCategoryProjects, ...otherProjects].slice(0, 3);
 });
 
 // Set meta tags for the project
