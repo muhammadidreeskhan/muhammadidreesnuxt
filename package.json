@@ -26,6 +26,7 @@
     "nuxt": "^3.13.0",
     "nuxt-icon": "^0.6.9",
     "sitemap": "^7.1.1",
+    "tailwind-lines-clamp": "0.4.*",
     "unenv": "^1.9.0"
   },
   "devDependencies": {
